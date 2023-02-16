@@ -1,7 +1,11 @@
 const express = require("express");
+const cors = require('cors');
 const app = express();
+
+app.use(cors())
+app.use(express.json());
 // const port = process.env.PORT || 3000;
-const port = 3000;
+const port = 5000;
 
 app.get('/', (req, res) =>{
     res.send("Wow, im excited to learn node....")
@@ -29,6 +33,17 @@ app.get('/users', (req, res) =>{
         res.send(users);
     }
 });
+
+// app. METHOD 
+app.post('/users', (req, res) =>{
+    const newUser = req.body;
+    newUser.id = users.length;
+    users.push(newUser);
+    console.log("hitting the post", req.body)
+    // res.send(JSON.stringify(newUser)) another way below
+    res.json(newUser)
+
+} )
 
 
 // daynamic api
